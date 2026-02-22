@@ -8,6 +8,11 @@ import iconDiceImg from "./images/icon-dice.svg";
 
 function App() {
   const [link, setLink] = useState([]);
+  //fetch on first load
+  useEffect(() => {
+    handleClick();
+  }, []);
+
   const handleClick = async () => {
     const data = await getData();
     setLink(data);
@@ -16,9 +21,9 @@ function App() {
   return (
     <div className="advice-container">
       <p id="advice-title">
-        Advice #<span id="advice-id"></span>
+        Advice #<span id="advice-id">{link?.slip?.id || "..."}</span>
       </p>
-      <p id="advice-text">{link.slip.advice}</p>
+      <p id="advice-text">{link?.slip?.advice || "Loading Wisdom..."}</p>
       <picture>
         <source media="(min-width: 768px)" srcSet={sourceImg} />
         <img id="pattern-divider" src={dividerImg} alt="divider" />
